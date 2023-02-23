@@ -3,13 +3,12 @@
 // @namespace   https://easrng.net
 // @match       https://cohost.org/*
 // @grant       none
-// @version     1.2
+// @version     1.3
 // @author      easrng
 // @description 2/23/2023, 6:13:44 AM
 // @run-at      document-start
 // @downloadURL https://easrng.github.io/improved-cohost-lightbox/script.user.js
 // ==/UserScript==
-window.onerror=alert;
 (function() {
     const realDefineProperty = Object.defineProperty.bind(Object)
     Object.defineProperty = function(object, key, descriptor) {
@@ -18,7 +17,7 @@ window.onerror=alert;
         })
     }
     window.addEventListener("load", async(e) => {
-        let promises = ["https://unpkg.com/swiper@9.0.5/swiper-element-bundle.min.js", "https://unpkg.com/htm@3.1.1/dist/htm.umd.js"].map(e=>fetch(e).then(e=>eval(e.text)))
+        let promises = ["https://unpkg.com/swiper@9.0.5/swiper-element-bundle.min.js", "https://unpkg.com/htm@3.1.1/dist/htm.umd.js"].map(e=>fetch(e).then(e=>e.text()).then(e=>eval(e)))
         for (const script of document.querySelectorAll("script[data-chunk]")) {
             promises.push(new Promise((cb, ecb) => {
                 script.addEventListener("load", cb)
