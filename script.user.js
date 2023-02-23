@@ -3,7 +3,7 @@
 // @namespace   https://easrng.net
 // @match       https://cohost.org/*
 // @grant       none
-// @version     1.8
+// @version     1.9
 // @author      easrng
 // @description 2/23/2023, 6:13:44 AM
 // @run-at      document-start
@@ -29,8 +29,17 @@
                 script.addEventListener("error", ecb)
             }))
         }
+        if(promises.length < 1) return;
         await Promise.all(promises);
-        if (!window.__LOADABLE_LOADED_CHUNKS__) return
+        const requiredChunks = JSON.parse(document.querySelector("#__LOADABLE_REQUIRED_CHUNKS__").textContent);
+        await new Promise(function check(cb){
+            const loadedChunks = (__LOADABLE_LOADED_CHUNKS__||[]).flatMap(e=>Object.keys(e[1]));
+            if(requiredChunks.find(e=>loadedChunks.includes(e+""))) {
+                cb()
+            } else {
+                setTimeout(()=>check(cb), 10)
+            }
+        })
         window.__LOADABLE_LOADED_CHUNKS__.push([
             [1818587769], {
                 1818587769: async (module, exports, require) => {
@@ -190,6 +199,7 @@
                             );
                         },
                     });
+                    console.log("done")
                 },
             },
             (r) => r(1818587769),
