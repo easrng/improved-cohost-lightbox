@@ -3,7 +3,7 @@
 // @namespace   https://easrng.net
 // @match       https://cohost.org/*
 // @grant       none
-// @version     1.9
+// @version     1.10
 // @author      easrng
 // @description 2/23/2023, 6:13:44 AM
 // @run-at      document-start
@@ -33,7 +33,7 @@
         await Promise.all(promises);
         const requiredChunks = JSON.parse(document.querySelector("#__LOADABLE_REQUIRED_CHUNKS__").textContent);
         await new Promise(function check(cb){
-            const loadedChunks = (__LOADABLE_LOADED_CHUNKS__||[]).flatMap(e=>Object.keys(e[1]));
+            const loadedChunks = (window.__LOADABLE_LOADED_CHUNKS__||[]).flatMap(e=>Object.keys(e[1]));
             if(requiredChunks.find(e=>loadedChunks.includes(e+""))) {
                 cb()
             } else {
@@ -45,7 +45,7 @@
                 1818587769: async (module, exports, require) => {
                     vendor.call(window)
                     const findLoadedModules = (check) =>
-                        __LOADABLE_LOADED_CHUNKS__
+                        window.__LOADABLE_LOADED_CHUNKS__
                         .map((e) => Object.keys(e[1]))
                         .flat()
                         .map((e) => require(e))
