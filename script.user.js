@@ -3,7 +3,7 @@
 // @namespace   https://easrng.net
 // @match       https://cohost.org/*
 // @grant       none
-// @version     1.10
+// @version     1.6
 // @author      easrng
 // @description 2/23/2023, 6:13:44 AM
 // @run-at      document-start
@@ -14,7 +14,6 @@
     function vendor() {
 
     };
-    console.log("lightbox load")
     const realDefineProperty = Object.defineProperty.bind(Object)
     Object.defineProperty = function(object, key, descriptor) {
         return realDefineProperty(object, key, {...descriptor,
@@ -22,6 +21,7 @@
         })
     }
     window.addEventListener("load", async(e) => {
+        vendor.call(window)
         let promises = []
         for (const script of document.querySelectorAll("script[data-chunk]")) {
             promises.push(new Promise((cb, ecb) => {
@@ -29,23 +29,13 @@
                 script.addEventListener("error", ecb)
             }))
         }
-        if(promises.length < 1) return;
         await Promise.all(promises);
-        const requiredChunks = JSON.parse(document.querySelector("#__LOADABLE_REQUIRED_CHUNKS__").textContent);
-        await new Promise(function check(cb){
-            const loadedChunks = (window.__LOADABLE_LOADED_CHUNKS__||[]).flatMap(e=>Object.keys(e[1]));
-            if(requiredChunks.find(e=>loadedChunks.includes(e+""))) {
-                cb()
-            } else {
-                setTimeout(()=>check(cb), 10)
-            }
-        })
+        if (!window.__LOADABLE_LOADED_CHUNKS__) return
         window.__LOADABLE_LOADED_CHUNKS__.push([
             [1818587769], {
-                1818587769: async (module, exports, require) => {
-                    vendor.call(window)
+                1818587769: (module, exports, require) => {
                     const findLoadedModules = (check) =>
-                        window.__LOADABLE_LOADED_CHUNKS__
+                        __LOADABLE_LOADED_CHUNKS__
                         .map((e) => Object.keys(e[1]))
                         .flat()
                         .map((e) => require(e))
@@ -199,7 +189,6 @@
                             );
                         },
                     });
-                    console.log("done")
                 },
             },
             (r) => r(1818587769),
