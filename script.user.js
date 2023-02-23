@@ -3,17 +3,17 @@
 // @namespace   https://easrng.net
 // @match       https://cohost.org/*
 // @grant       none
-// @version     1.5
+// @version     1.6
 // @author      easrng
 // @description 2/23/2023, 6:13:44 AM
 // @run-at      document-start
 // @downloadURL https://easrng.github.io/improved-cohost-lightbox/script.user.js
 // ==/UserScript==
 
-
-
-
 (function() {
+    function vendor() {
+
+    };
     const realDefineProperty = Object.defineProperty.bind(Object)
     Object.defineProperty = function(object, key, descriptor) {
         return realDefineProperty(object, key, {...descriptor,
@@ -21,6 +21,7 @@
         })
     }
     window.addEventListener("load", async(e) => {
+        vendor.call(window)
         let promises = []
         for (const script of document.querySelectorAll("script[data-chunk]")) {
             promises.push(new Promise((cb, ecb) => {
