@@ -3,7 +3,7 @@
 // @namespace   https://easrng.net
 // @match       https://cohost.org/*
 // @grant       none
-// @version     1.7
+// @version     1.8
 // @author      easrng
 // @description 2/23/2023, 6:13:44 AM
 // @run-at      document-start
@@ -14,6 +14,7 @@
     function vendor() {
 
     };
+    console.log("lightbox load")
     const realDefineProperty = Object.defineProperty.bind(Object)
     Object.defineProperty = function(object, key, descriptor) {
         return realDefineProperty(object, key, {...descriptor,
