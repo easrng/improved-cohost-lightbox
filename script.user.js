@@ -3,7 +3,7 @@
 // @namespace   https://easrng.net
 // @match       https://cohost.org/*
 // @grant       none
-// @version     1.6
+// @version     1.7
 // @author      easrng
 // @description 2/23/2023, 6:13:44 AM
 // @run-at      document-start
@@ -21,15 +21,7 @@
         })
     }
     window.addEventListener("load", async(e) => {
-        let promises = [new Promise((cb, ecb)=>{
-            setTimeout(()=>{
-                try {
-                    cb(vendor.call(window))
-                } catch (e) {
-                    ecb(e)
-                }
-            }, 10)
-        })]
+        let promises = []
         for (const script of document.querySelectorAll("script[data-chunk]")) {
             promises.push(new Promise((cb, ecb) => {
                 script.addEventListener("load", cb)
@@ -40,7 +32,8 @@
         if (!window.__LOADABLE_LOADED_CHUNKS__) return
         window.__LOADABLE_LOADED_CHUNKS__.push([
             [1818587769], {
-                1818587769: (module, exports, require) => {
+                1818587769: async (module, exports, require) => {
+                    vendor.call(window)
                     const findLoadedModules = (check) =>
                         __LOADABLE_LOADED_CHUNKS__
                         .map((e) => Object.keys(e[1]))
