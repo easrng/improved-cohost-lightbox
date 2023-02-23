@@ -33,7 +33,7 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: vendor libs
-        run: 'cat script.user.js | head -n 11 >out.user.js; curl -L https://unpkg.com/swiper@9.0.5/swiper-element-bundle.min.js >>out.user.js;curl -L https://unpkg.com/htm@3.1.1/dist/htm.umd.js >>out.user.js;cat script.user.js | tail -n +11 >>out.user.js; mv out.user.js out.user.js'
+        run: 'cat script.user.js | head -n 11 >out.user.js; curl -L https://unpkg.com/swiper@9.0.5/swiper-element-bundle.min.js >>out.user.js;curl -L https://unpkg.com/htm@3.1.1/dist/htm.umd.js >>out.user.js;cat script.user.js | tail -n +11 >>out.user.js; mv out.user.js script.user.js'
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
