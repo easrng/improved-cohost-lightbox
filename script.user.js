@@ -21,8 +21,15 @@
         })
     }
     window.addEventListener("load", async(e) => {
-        vendor.call(window)
-        let promises = []
+        let promises = [new Promise((cb, ecb)=>{
+            setTimeout(()=>{
+                try {
+                    cb(vendor.call(window))
+                } catch (e) {
+                    ecb(e)
+                }
+            }, 10)
+        })]
         for (const script of document.querySelectorAll("script[data-chunk]")) {
             promises.push(new Promise((cb, ecb) => {
                 script.addEventListener("load", cb)
