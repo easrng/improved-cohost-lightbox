@@ -3,7 +3,7 @@
 // @namespace   https://easrng.net
 // @match       https://cohost.org/*
 // @grant       none
-// @version     1.1
+// @version     1.2
 // @author      easrng
 // @description 2/23/2023, 6:13:44 AM
 // @run-at      document-start
@@ -18,7 +18,7 @@ window.onerror=alert;
         })
     }
     window.addEventListener("load", async(e) => {
-        let promises = ["https://unpkg.com/swiper@9.0.5/swiper-element-bundle.min.js", "https://unpkg.com/htm@3.1.1/dist/htm.umd.js"].map(url=>new Promise((onload,onerror)=>document.head.appendChild(Object.assign(document.createElement("script"), {src:url, onload, onerror}))))
+        let promises = ["https://unpkg.com/swiper@9.0.5/swiper-element-bundle.min.js", "https://unpkg.com/htm@3.1.1/dist/htm.umd.js"].map(e=>fetch(e).then(e=>eval(e.text)))
         for (const script of document.querySelectorAll("script[data-chunk]")) {
             promises.push(new Promise((cb, ecb) => {
                 script.addEventListener("load", cb)
