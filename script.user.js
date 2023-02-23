@@ -3,7 +3,7 @@
 // @namespace   https://easrng.net
 // @match       https://cohost.org/*
 // @grant       none
-// @version     1.6
+// @version     1.12
 // @author      easrng
 // @description 2/23/2023, 6:13:44 AM
 // @run-at      document-start
@@ -35,7 +35,7 @@
             [1818587769], {
                 1818587769: (module, exports, require) => {
                     const findLoadedModules = (check) =>
-                        __LOADABLE_LOADED_CHUNKS__
+                        window.__LOADABLE_LOADED_CHUNKS__
                         .map((e) => Object.keys(e[1]))
                         .flat()
                         .map((e) => require(e))
