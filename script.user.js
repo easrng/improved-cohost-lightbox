@@ -3,12 +3,16 @@
 // @namespace   https://easrng.net
 // @match       https://cohost.org/*
 // @grant       none
-// @version     1.4
+// @version     1.5
 // @author      easrng
 // @description 2/23/2023, 6:13:44 AM
 // @run-at      document-start
 // @downloadURL https://easrng.github.io/improved-cohost-lightbox/script.user.js
 // ==/UserScript==
+
+
+
+
 (function() {
     const realDefineProperty = Object.defineProperty.bind(Object)
     Object.defineProperty = function(object, key, descriptor) {
