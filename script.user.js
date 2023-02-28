@@ -3,7 +3,7 @@
 // @namespace   https://easrng.net
 // @match       https://cohost.org/*
 // @grant       none
-// @version     1.13
+// @version     1.14
 // @author      easrng
 // @description 2/23/2023, 6:13:44 AM
 // @run-at      document-start
@@ -102,7 +102,7 @@
                       }, [])
                       const [hideControls, setHideControls] = React.useState(false)
                       return html`
-                        <swiper-container ref=${swiperElRef} navigation="true" pagination="true" keyboard="true" class="fixed inset-0 z-10 bg-notBlack bg-opacity-90 backdrop-blur" style=${{"--swiper-theme-color":"rgb(var(--color-accent))","--swiper-pagination-bullet-inactive-color":"rgb(var(--color-notWhite))", "--easrng-swiper-controls": hideControls? "0":undefined}}>
+                        <swiper-container ref=${swiperElRef} navigation="true" pagination="true" keyboard="true" class="fixed inset-0 z-30 bg-notBlack bg-opacity-90 backdrop-blur" style=${{"--swiper-theme-color":"rgb(var(--color-accent))","--swiper-pagination-bullet-inactive-color":"rgb(var(--color-notWhite))", "--easrng-swiper-controls": hideControls? "0":undefined}}>
                           <div slot="container-start" class="fixed bottom-4 right-4 z-20">
                             <svg viewBox="0 0 25 18" xmlns="http://www.w3.org/2000/svg" class="cohost-shadow-light dark:cohost-shadow-dark inline-block h-8 cursor-pointer fill-composeButton text-text hover:fill-text hover:text-composeButton ${hideControls? "invisible":""}" role="button" tabindex="0" onClick=${()=>closeLightbox()}>
                               <path d="M14.923 17.087c-2.254.666-4.388.967-6.402.905-2.014-.062-3.742-.532-5.183-1.409-1.442-.877-2.436-2.217-2.982-4.022-.549-1.814-.463-3.476.257-4.985.719-1.51 1.905-2.832 3.557-3.965C5.823 2.478 7.776 1.578 10.03.913c2.243-.663 4.369-.965 6.376-.906 2.007.059 3.733.523 5.178 1.394 1.446.87 2.441 2.207 2.987 4.011.546 1.804.457 3.464-.266 4.981-.724 1.516-1.908 2.845-3.551 3.987-1.644 1.143-3.588 2.045-5.831 2.707Z"/>
