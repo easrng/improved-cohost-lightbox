@@ -3,7 +3,7 @@
 // @namespace   https://easrng.net
 // @match       https://cohost.org/*
 // @grant       none
-// @version     1.14
+// @version     1.15
 // @author      easrng
 // @description 2/23/2023, 6:13:44 AM
 // @run-at      document-start
@@ -136,11 +136,22 @@
                                     el.id = "lightbox-container";
                                     document.body.appendChild(el);
                                 }
-                                //el.onkeydown = (e) => console.log(e);
                                 modalContainer.current = el;
-                                window.addEventListener("popstate", e => {
-                                  setIsOpen(history.state && history.state.lightboxOpen)
-                                })
+                                const onPopState = e => {
+                                    setIsOpen(history.state && history.state.lightboxOpen)
+                                }
+                                window.addEventListener("popstate", onPopState)
+                                const onKeyDown = e => {
+                                    if(e.key === "Escape" && history.state.lightboxOpen) {
+                                        event.preventDefault()
+                                        setIsOpen(false)
+                                    }
+                                }
+                                window.addEventListener("keydown", onKeyDown)
+                                return () => {
+                                    window.removeEventListener("popstate", onPopState)
+                                    window.removeEventListener("keydown", onKeyDown)
+                                }
                             });
                             React.useEffect(() => {
                               if(isOpen) {
