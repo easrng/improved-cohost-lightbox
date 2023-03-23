@@ -22,15 +22,10 @@
     }
     window.addEventListener("load", async(e) => {
         vendor.call(window)
-        let promises = []
-        for (const script of document.querySelectorAll("script[data-chunk]")) {
-            promises.push(new Promise((cb, ecb) => {
-                script.addEventListener("load", cb)
-                script.addEventListener("error", ecb)
-            }))
+        if (!window.__LOADABLE_LOADED_CHUNKS__) {
+            console.log("no __LOADABLE_LOADED_CHUNKS__")
+            return
         }
-        await Promise.all(promises);
-        if (!window.__LOADABLE_LOADED_CHUNKS__) return
         window.__LOADABLE_LOADED_CHUNKS__.push([
             [1818587769], {
                 1818587769: (module, exports, require) => {
