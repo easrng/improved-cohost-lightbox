@@ -195,6 +195,9 @@
                             );
                         },
                     });
+                    const appRoot = document.getElementById("app");
+                    const container = appRoot[Object.keys(appRoot).find(e=>e.startsWith("__reactContainer"))];
+                    ReactDOM.render(container.memoizedState.element, appRoot);
                 },
             },
             (r) => r(1818587769),
