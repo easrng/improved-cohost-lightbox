@@ -3,7 +3,7 @@
 // @namespace   https://easrng.net
 // @match       https://cohost.org/*
 // @grant       none
-// @version     1.15
+// @version     1.16
 // @author      easrng
 // @description 2/23/2023, 6:13:44 AM
 // @run-at      document-start
