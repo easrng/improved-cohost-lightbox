@@ -3,7 +3,7 @@
 // @namespace   https://easrng.net
 // @match       https://cohost.org/*
 // @grant       none
-// @version     1.17
+// @version     1.18
 // @author      easrng
 // @description 2/23/2023, 6:13:44 AM
 // @run-at      document-start
@@ -20,7 +20,27 @@
             configurable: typeof descriptor.configurable === "boolean" ? descriptor.configurable : key !== "prototype"
         })
     }
+    const promises = [];
+    const observer = new MutationObserver((mutations) => {
+        for (const mutation of mutations) {
+            if (mutation.type === "childList") {
+                for (const node of mutation.addedNodes) {
+                    if (node.nodeName === "SCRIPT" && node.dataset.chunk) {
+                        promises.push(
+                            new Promise((resolve, reject) => {
+                                node.addEventListener("load", resolve);
+                                node.addEventListener("error", reject);
+                            })
+                        );
+                    }
+                }
+            }
+        }
+    });
+    observer.observe(document, { childList: true, subtree: true });
     window.addEventListener("load", async(e) => {
+        observer.disconnect();
+        await Promise.all(promises);
         vendor.call(window)
         if (!window.__LOADABLE_LOADED_CHUNKS__) {
             console.log("no __LOADABLE_LOADED_CHUNKS__")
