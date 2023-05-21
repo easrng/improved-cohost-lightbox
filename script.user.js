@@ -3,14 +3,14 @@
 // @namespace   https://easrng.net
 // @match       https://cohost.org/*
 // @grant       none
-// @version     1.18
+// @version     1.19
 // @author      easrng
 // @description 2/23/2023, 6:13:44 AM
 // @run-at      document-start
 // @downloadURL https://easrng.github.io/improved-cohost-lightbox/script.user.js
 // ==/UserScript==
 
-(function() {
+(function() {/*// disabled until i have time and willingness to fix
     function vendor() {
 
     };
@@ -222,5 +222,5 @@
             },
             (r) => r(1818587769),
         ])
-    });
+    });*/
 })()
